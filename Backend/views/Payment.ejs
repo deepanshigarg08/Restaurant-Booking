@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debit Card Payment Form</title>
+</head>
+<body>
+    <h3>Welcome to Debit Card Payment Form!</h3>
+
+    <!-- Payment Form -->
+    <form id="payment-form">
+        <label for="customer-name">Customer Name:</label>
+        <input type="text" id="customer-name" name="customerName" required>
+        <br><br>
+
+        <label for="customer-address">Address Line 1:</label>
+        <input type="text" id="address-line1" name="addressLine1" required>
+        <br><br>
+
+        <label for="customer-city">City:</label>
+        <input type="text" id="customer-city" name="city" required>
+        <br><br>
+
+        <label for="customer-state">State:</label>
+        <input type="text" id="customer-state" name="state" required>
+        <br><br>
+
+        <label for="customer-postal-code">Postal Code:</label>
+        <input type="text" id="postal-code" name="postalCode" required>
+        <br><br>
+
+        <!-- Card Details -->
+        <label for="card-element">Card Details:</label>
+        <div id="card-element" style="border: 1px solid #ccc; padding: 10px;"></div>
+        <div id="card-errors" role="alert" style="color: red; margin-top: 10px;"></div>
+        <br>
+
+        <!-- Submit Button -->
+        <button type="submit">Proceed to Payment</button>
+    </form>
+
+    <!-- Include Stripe.js -->
+    <script src="https://js.stripe.com/v3/"></script>
+
+    <script>
+        const stripe = Stripe('pk_test_51OnD5DSHKuOJ2OzwK75MUOL0gh3uRoE1bZcBAtUwHfNutdDO82rga092Oh38PgDgZWS3v3gGqSKUM8BUrll0Ln6800rCwKR3jc'); // Replace with your actual publishable key
+        const elements = stripe.elements();
+
+        // Create an instance of the CardElement
+        const cardElement = elements.create('card');
+        cardElement.mount('#card-element');
+
+        // Handle form submission
+        const form = document.getElementById('payment-form');
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData(form);
+            const data = {
+                customerName: formData.get('customerName'),
+                customerAddress: {
+                    line1: formData.get('addressLine1'),
+                    city: formData.get('city'),
+                    state: formData.get('state'),
+                    postal_code: formData.get('postalCode'),
+                    country: 'IN',  // Add country code for India
+                },
+                amount: 50000, // Replace with the actual amount in the smallest currency unit (e.g., paise for INR)
+            };
+
+            // Send data to the backend to create a PaymentIntent
+            const response = await fetch('/create-payment-intent', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            });
+
+            const { clientSecret, error } = await response.json();
+
+            if (error) {
+                alert(`Error: ${error}`);
+                return;
+            }
+
+            // Confirm the card payment using the PaymentIntent client secret
+            const { error: stripeError } = await stripe.confirmCardPayment(clientSecret, {
+                payment_method: {
+                    card: cardElement,
+                    billing_details: {
+                        name: formData.get('customerName'),
+                        address: {
+                            line1: formData.get('addressLine1'),
+                            city: formData.get('city'),
+                            state: formData.get('state'),
+                            postal_code: formData.get('postalCode'),
+                            country: 'IN',  // Add country code for India
+                        },
+                    },
+                },
+            });
+
+            if (stripeError) {
+                document.getElementById('card-errors').textContent = stripeError.message;
+            } else {
+                alert('Payment Successful!');
+                form.reset();
+                cardElement.clear();
+            }
+        });
+    </script>
+</body>
+</html>

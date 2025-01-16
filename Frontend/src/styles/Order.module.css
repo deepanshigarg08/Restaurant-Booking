@@ -1,0 +1,268 @@
+.order-history-container {
+    padding: 20px;
+    background-color: #f4f4f4;
+    text-align: center;
+  }
+  
+  .order-history-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .order-history-card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    padding: 20px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .order-history-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  .order-history-details {
+    margin-top: 15px;
+  }
+  
+  .cancel-button {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #e53935;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+  }
+  
+  .cancel-button:hover {
+    background-color: #d32f2f;
+  }
+  
+  .paracon{
+
+     display: flex;
+     align-items: center;
+     gap: 10px;
+  }
+
+
+
+  /* Media queires */
+
+
+
+/* Medium Screens (Tablets) */
+@media (max-width: 768px) {
+  .order-history-card {
+    width: 80%;
+  }
+
+  .order-history-img {
+    height: 150px;
+  }
+
+  .cancel-button {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+
+  .paracon {
+    flex-direction: column; /* Stack items vertically */
+    gap: 15px; /* Increase gap between items */
+  }
+}
+
+/* Small Screens (Phones) */
+@media (max-width: 576px) {
+  .order-history-list {
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .order-history-card {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .order-history-img {
+    height: 120px;
+  }
+
+  .cancel-button {
+    padding: 6px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Extra Small Screens (Very small devices) */
+@media (max-width: 400px) {
+  .order-history-card {
+    width: 95%;
+    padding: 10px;
+  }
+
+  .order-history-img {
+    height: 100px;
+  }
+
+  .cancel-button {
+    font-size: 0.75rem;
+  }
+
+
+  .paracon {
+    flex-direction: column; /* Stack items vertically */
+    gap: 20px; /* Increase gap between items */
+  }
+
+  
+}
+
+.order-history-container {
+  padding: 20px;
+  background-color: #f4f4f4;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+}
+
+.order-history-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.order-history-card {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  width: 300px;
+  padding: 20px;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.order-history-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
+}
+
+.order-history-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.order-history-img:hover {
+  transform: scale(1.05);
+}
+
+.order-history-details {
+  margin-top: 15px;
+  color: #333;
+}
+
+.cancel-button {
+  margin-top: 10px;
+  padding: 10px;
+  background-color: #e53935;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.cancel-button:hover {
+  background-color: #d32f2f;
+}
+
+.paracon {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #555;
+}
+
+/* Media queries */
+
+/* Medium Screens (Tablets) */
+@media (max-width: 768px) {
+  .order-history-card {
+      width: 80%;
+  }
+
+  .order-history-img {
+      height: 150px;
+  }
+
+  .cancel-button {
+      padding: 8px;
+      font-size: 0.9rem;
+  }
+
+  .paracon {
+      flex-direction: column; /* Stack items vertically */
+      gap: 15px; /* Increase gap between items */
+  }
+}
+
+/* Small Screens (Phones) */
+@media (max-width: 576px) {
+  .order-history-list {
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+  }
+
+  .order-history-card {
+      width: 90%;
+      padding: 15px;
+  }
+
+  .order-history-img {
+      height: 120px;
+  }
+
+  .cancel-button {
+      padding: 6px;
+      font-size: 0.8rem;
+  }
+}
+
+/* Extra Small Screens (Very small devices) */
+@media (max-width: 400px) {
+  .order-history-card {
+      width: 95%;
+      padding: 10px;
+  }
+
+  .order-history-img {
+      height: 100px;
+  }
+
+  .cancel-button {
+      font-size: 0.75rem;
+  }
+
+  .paracon {
+      flex-direction: column; /* Stack items vertically */
+      gap: 20px; /* Increase gap between items */
+  }
+}
